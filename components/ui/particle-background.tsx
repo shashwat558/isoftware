@@ -70,20 +70,25 @@ const ParticleBackground = ({ className }: ParticleBackgroundProps) => {
     function initParticles() {
       particles = [];
       const numberOfParticles = Math.min(
+        //@ts-ignore
         Math.floor((canvas.width * canvas.height) / 10000),
         100
       );
       
       for (let i = 0; i < numberOfParticles; i++) {
+        //@ts-ignore
         particles.push(new Particle(canvas.width, canvas.height));
       }
     }
 
     function animate() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      //@ts-ignore
+      ctx?.clearRect(0, 0, canvas.width, canvas.height);
       
       for (let i = 0; i < particles.length; i++) {
+        //@ts-ignore
         particles[i].update(canvas.width, canvas.height);
+        //@ts-ignore
         particles[i].draw(ctx);
       }
       
@@ -95,12 +100,16 @@ const ParticleBackground = ({ className }: ParticleBackgroundProps) => {
           const distance = Math.sqrt(dx * dx + dy * dy);
           
           if (distance < 100) {
-            ctx.beginPath();
+            ctx?.beginPath();
+            //@ts-ignore
             ctx.strokeStyle = `rgba(255, 255, 255, ${0.2 * (1 - distance / 100)})`;
+            //@ts-ignore
             ctx.lineWidth = 0.2;
+            //@ts-ignore
             ctx.moveTo(particles[i].x, particles[i].y);
+            //@ts-ignore
             ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.stroke();
+            ctx?.stroke();
           }
         }
       }
